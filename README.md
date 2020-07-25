@@ -1,7 +1,9 @@
+https://travis-ci.org/JamesXue00/hw-bdd-cucumber.svg?branch=master
+
 # TDD with RSpec
 
 In this assignment you will use a combination of Acceptance and
-Unit/Functional 
+Unit/Functional
 tests with the Cucumber and RSpec tools to add a "find movies with same
 director" feature to RottenPotatoes.
 
@@ -15,7 +17,7 @@ After you complete this assignment, you should be able to:
 * Create and run simple Cucumber scenarios to test a new feature
 
 * Use RSpec to create unit and functional tests that drive the creation
-of app code that lets the Cucumber scenario pass 
+of app code that lets the Cucumber scenario pass
 
 * Understand where to modify a Rails app to implement the various parts
 of a new feature, since a new feature often touches the database schema,
@@ -47,7 +49,7 @@ The idea behind CI is simple: it can be set up to automatically run
 tasks related to testing and verification each time you push new code.
 For Rails apps that have been set up with Cucumber and RSpec, the tasks
 `rake cucumber` and `rake rspec` run all of the Cucumber scenarios and
-RSpec tests, respectively.  We will also include an additional task 
+RSpec tests, respectively.  We will also include an additional task
 that measures test coverage, by tracking which lines of which files in your
 app are actually "touched" by any test code.
 
@@ -65,8 +67,8 @@ that file.
 code-analysis service, to report on your test coverage.  To set this up:
 Setup a free account (we recommend using "Sign In With GitHub") on `codeclimate.com`, and add the repo for this
 homework.  Go to the repo's settings in CodeClimate, select the Test Coverage set of options, and
-copy the CodeClimate Test Reporter ID (a long hexadecimal string).  **Copy this string to the `.travis.yml` file** as the value 
-for the global option `CC_TEST_REPORTER_ID`.  **If you don't do this step, Travis will be unable to report 
+copy the CodeClimate Test Reporter ID (a long hexadecimal string).  **Copy this string to the `.travis.yml` file** as the value
+for the global option `CC_TEST_REPORTER_ID`.  **If you don't do this step, Travis will be unable to report
 test coverage results to CodeClimate.**
 
 **Part 0: Setup - ensure tests run locally**
@@ -77,9 +79,9 @@ and do the necessary configuration to install Cucumber and RSpec:
 ```
 bundle install --without production
 bundle exec rake db:migrate
-rails generate cucumber:install capybara 
-rails generate cucumber_rails_training_wheels:install 
-rails generate rspec:install 
+rails generate cucumber:install capybara
+rails generate cucumber_rails_training_wheels:install
+rails generate rspec:install
 ```
 
 1. You can double-check if everything was installed by running `bundle exec rake rspec` and `bundle exec rake cucumber`.  
@@ -90,9 +92,9 @@ the RSpec tests you'll need in `spec/`.
 1. Next, set up test coverage collection.  Add the following code **BEFORE ANYTHING ELSE ON LINE ONE** of both
 `spec/rails_helper.rb` and `features/support/env.rb`:
 
-```ruby 
-require 'simplecov' 
-SimpleCov.start 'rails' 
+```ruby
+require 'simplecov'
+SimpleCov.start 'rails'
 ```
 
 Now whenever you run `rspec` or `cucumber`, SimpleCov will generate a coverage report
@@ -106,7 +108,7 @@ it should run very quickly.  In particular, inspect the output to make sure the 
 test coverage results and sending them to CodeClimate was successful.
 
 1. Finally, check CodeClimate for the results of analyzing both code quality and test coverage on your app.
-For test coverage, you can click on the name of any file in CodeClimate, then click the Code tab, then check the 
+For test coverage, you can click on the name of any file in CodeClimate, then click the Code tab, then check the
 Coverage box.  Lines that were "touched" by some test will be highlighted.
 
 
@@ -125,7 +127,7 @@ database!
 
 Remember to add the new `director` attribute to the list of movie
 attributes allowed in `params`, in the `movie_params` method in
-`movies_controller.rb`. 
+`movies_controller.rb`.
 
 
 **Part 2: use Acceptance and Unit tests to get new scenarios passing**
@@ -156,7 +158,7 @@ the creation of:
 for routes as suggested in "Non-Resource-Based Routes" in Section 4.1 of
 ESaaS). You can also use the key :as to specify a name to generate
 helpers (i.e. `search_directors_path`)
-http://guides.rubyonrails.org/routing.html 
+http://guides.rubyonrails.org/routing.html
 
 Note: you probably won't test
 this directly in rspec, but a line in Cucumber or rspec will fail if the
@@ -168,15 +170,15 @@ match (i.e. the one we're trying to find movies similar to)
 
 * a model method in the Movie model to find movies whose director
 matches that of the current movie. Note: This implies that you should
-write at least 2 specs for your controller: 
+write at least 2 specs for your controller:
 
 1) When the specified movie has a director, it should...  
 
-2) When the specified movie has no director, it should ... 
+2) When the specified movie has no director, it should ...
 
-and 2 specs for your model: 
+and 2 specs for your model:
 
-1) it should find movies by the same director and 
+1) it should find movies by the same director and
 
 2) it should not find movies by different directors.
 
